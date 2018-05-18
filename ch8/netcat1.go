@@ -4,6 +4,7 @@ import (
 	"net"
 	"log"
 	"io"
+	"os"
 )
 
 func main(){
@@ -13,6 +14,7 @@ func main(){
 		log.Fatal(err)
 	}
 	defer conn.Close()
+	mustCopy(os.Stdout, conn)
 
 }
 
