@@ -24,6 +24,5 @@ func main(){
 		fmt.Println(<-squares)
 	}
 
-
 }
 
