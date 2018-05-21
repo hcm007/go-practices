@@ -5,23 +5,29 @@ import (
 	"log"
 	"net"
 	"os"
+	"fmt"
 )
 
 
 func main(){
 	conn, err := net.Dial("tcp", "localhost:8000")
+	//defer conn.Close()
 	if err != nil{
 		log.Fatal(err)
 	}
-	done := make(chan struct{})
+	done := make(chan int)
 	go func(){
-		io.Copy(os.Stdout, conn)
+		_,err:=io.Copy(os.Stdout, conn)
+		if err!= nil{
+			log.Println(err)
+		}
 		log.Println("done")
-		done <- struct{}{}
+		done <- 10
 	}()
 	mustCopy(conn, os.Stdin)
 	conn.Close()
-	<- done
+	intdown := <- done
+	fmt.Print(intdown)
 
 }
 
