@@ -20,11 +20,10 @@ func main(){
 		}
 		close(squares)
 	}()
-	
+
 
 	for x := range squares{
 		fmt.Println(x)
 	}
-
 
 }
